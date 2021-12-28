@@ -73,3 +73,6 @@ $route['expiringSoon/(:any)'] = 'Inventory/expiringSoon/$1';
 $route['drugsList/(:any)'] = 'Inventory/drugsList/$1';
 $route['addDrug'] = 'Inventory/addDrug';
 
+// GST
+$route['gstNotPaid/(:any)'] = 'GST/gstNotPaid/$1';
+

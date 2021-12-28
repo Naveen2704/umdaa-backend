@@ -7,24 +7,28 @@ class Orders extends Rest_Controller {
         parent::__construct();        
     }
 
-    public function ordersList_post(){
+    public function ordersList_get($clinic_id){
         if(isset($_POST)){
-            $ordersInfo = $this->DefaultModel->getAllRecords("billings", array('billing_type'=>'Pharmacy'));
+            $ordersInfo = $this->DefaultModel->getAllRecords("billing", array('billing_type'=>'Pharmacy', 'clinic_id'=>$clinic_id));
             if(count($ordersInfo) > 0){
                 $i = 0;
                 foreach($ordersInfo as $value){
                     // $lineItems = $this->DefaultModel->getAllRecords('billing_line_items', array('billing_id' => $value->billing_id));
+                    $data['ordersData'][$i]['id'] = $i+1;
                     $data['ordersData'][$i]['billing_id'] = $value->billing_id;
                     $data['ordersData'][$i]['guest_name'] = $value->guest_name;
                     $data['ordersData'][$i]['mobile'] = DataCrypt($value->guest_mobile, 'decrypt');
-                    $data['ordersData'][$i]['total_amount'] = $value->total_amount;
-                    $data['ordersData'][$i]['billing_amount'] = $value->billing_amount;
+                    $data['ordersData'][$i]['total_amount'] = number_format($value->total_amount, 2);
+                    $data['ordersData'][$i]['billing_amount'] = number_format($value->billing_amount, 2);
                     $data['ordersData'][$i]['gender'] = $value->gender;
                     $data['ordersData'][$i]['invoice_no'] = $value->invoice_no;
+                    $data['ordersData'][$i]['payment_mode'] = $value->payment_mode;
+                    $data['ordersData'][$i]['transaction_id'] = $value->transaction_id;
                     $data['ordersData'][$i]['age'] = $value->age." ".$value->age_unit;
                     $data['ordersData'][$i]['order_date'] = date("d,M Y h:i A", strtotime($value->billing_date_time));
                     $i++;
-                }                
+                }  
+                $this->response(array('code' => '200', 'message' => 'Success', 'result' => $data));              
             }
         }
     }
