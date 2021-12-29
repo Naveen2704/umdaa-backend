@@ -63,9 +63,9 @@ class DefaultModel extends CI_Model {
 		}
 	}
 
-	public function getgroupbyRecords($table, $condition)
+	public function getgroupbyRecords($table, $condition, $grpCondition)
 	{
-		return $this->db->select('*')->from($table)->group_by($condition)->get()->result();
+		return $this->db->select('*')->from($table)->where($condition)->group_by($grpCondition)->get()->result();
 	}	
 	
 	public function deleteRecord($table, $condition)

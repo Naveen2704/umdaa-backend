@@ -132,7 +132,7 @@ class Orders extends Rest_Controller {
         $this->response(array('code' => '200', 'message' => 'Success', 'result' => $billing_id));
     }
 
-    private function decreaseQty($clinic_pharmacy_inventory_inward_id, $qty) {
+    public function decreaseQty($clinic_pharmacy_inventory_inward_id, $qty) {
         $clinicDrugInfo = $this->DefaultModel->getSingleRecord('clinic_pharmacy_inventory_inward', array('clinic_pharmacy_inventory_inward_id'=>$clinic_pharmacy_inventory_inward_id));
         $data['remaining_quantity'] = $clinicDrugInfo->quantity - $qty;
         $this->DefaultModel->updateData('clinic_pharmacy_inventory_inward', $data, array('clinic_pharmacy_inventory_inward_id'=>$clinic_pharmacy_inventory_inward_id));

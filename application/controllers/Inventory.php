@@ -98,7 +98,7 @@ class Inventory extends Rest_Controller {
                 $data['inventory'][$i]['formulation'] = $drugInfo->formulation;
                 $data['inventory'][$i]['batch_no'] = $value->batch_no;
                 $data['inventory'][$i]['expiry_date'] = date("M' Y", strtotime($value->expiry_date));
-                $data['inventory'][$i]['quantity'] = (int) $value->quantity;
+                $data['inventory'][$i]['quantity'] = (int) $value->remaining_quantity;
                 $data['inventory'][$i]['mrp'] = number_format($value->mrp, 2);
                 $data['inventory'][$i]['pack_size'] = (int) $value->pack_size;
                 $data['inventory'][$i]['hsn_code'] = $drugInfo->hsn_code;

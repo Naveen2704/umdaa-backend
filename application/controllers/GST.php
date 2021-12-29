@@ -29,8 +29,8 @@ class GST extends Rest_Controller {
                 $gst = $cgst + $igst + $sgst;
                 $gstTotal += $gst;
             }
-            $data['profit'] = $profit;
-            $data['gstTobePaid'] = $gstTotal;
+            $data['profit'] = number_format($profit, 2);
+            $data['gstTobePaid'] = number_format($gstTotal, 2);
             $this->response(array('code'=>'200','message'=>'success','result'=>$data));
         }
     }

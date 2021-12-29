@@ -76,3 +76,6 @@ $route['addDrug'] = 'Inventory/addDrug';
 // GST
 $route['gstNotPaid/(:any)'] = 'GST/gstNotPaid/$1';
 
+// Customers
+$route['customers/(:any)'] = 'Customers/customersList/$1';
+
