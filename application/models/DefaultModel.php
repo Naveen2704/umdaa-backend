@@ -83,13 +83,15 @@ class DefaultModel extends CI_Model {
 		return $this->db->select_sum($sum_col)->from($table)->where($condition)->get()->row();
 	}
 
-	public function getJoinRecords($table,$jointable,$oncondition,$condition=array(),$type_join="",$select)
+	public function getJoinRecords($table,$jointable,$oncondition,$condition=array(),$type_join="",$select,$order)
 	{
 		$this->db->select($select);
 		$this->db->from($table);
 		$this->db->join($jointable,$oncondition,$type_join);
         if(!empty($condition))
 		$this->db->where($condition);
+        if(!empty($order))
+		$this->db->order_by($order);
 	    return $this->db->get()->result();
     }		
 	

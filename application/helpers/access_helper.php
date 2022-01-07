@@ -55,6 +55,28 @@ if ( ! function_exists('is_logged_in'))
             return $output;
         }
     }
+    
+    // get patient name from appointment_id
+    function getPatientName($patient_id)
+    {
+        $CI = &get_instance();
+        $patientInfo = $CI->db->query("select title,first_name,last_name from patients where patient_id='" . $patient_id . "'")->row();
+        $title = $patientInfo->title;
+        if ($title == "") {
+            $fullname = $patientInfo->first_name . " " . $patientInfo->last_name;
+        } else {
+            $fullname = $title . ". " . $patientInfo->first_name . " " . $patientInfo->last_name;
+        }
+        return $fullname;
+    }
+
+    function getDoctorName($doctor_id)
+    {
+        $CI = &get_instance();
+        $docInfo = $CI->db->query("select first_name,last_name from doctors where doctor_id='" . $doctor_id . "'")->row();
+        $fullname = "Dr. " . $docInfo->first_name . " " . $docInfo->last_name;
+        return $fullname;
+    }
 
 }
 

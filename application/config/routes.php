@@ -64,6 +64,7 @@ $route['suppliers/(:any)'] = 'Suppliers/suppliersList/$1';
 $route['invDrugSearch/(:any)/(:any)'] = 'Orders/getInventoryDrugs/$1/$2';
 $route['createOrder'] = 'Orders/generateOrder';
 $route['orders/(:any)'] = 'Orders/OrdersList/$1';
+$route['invoice/(:any)'] = 'Orders/Invoice/$1';
 
 // Inventory
 $route['inventory/(:any)'] = 'Inventory/inventory/$1';
@@ -72,10 +73,23 @@ $route['expired/(:any)'] = 'Inventory/expired/$1';
 $route['expiringSoon/(:any)'] = 'Inventory/expiringSoon/$1';
 $route['drugsList/(:any)'] = 'Inventory/drugsList/$1';
 $route['addDrug'] = 'Inventory/addDrug';
+$route['deleteDrug/(:any)'] = 'Inventory/deleteDrug/$1';
 
 // GST
 $route['gstNotPaid/(:any)'] = 'GST/gstNotPaid/$1';
+$route['clearGst/(:any)'] = 'GST/clearGst/$1';
 
 // Customers
 $route['customers/(:any)'] = 'Customers/customersList/$1';
+
+// Settings
+$route['settings/(:any)'] = 'Settings/settings/$1';
+$route['saveSettingsInfo'] = 'Settings/saveSettings';
+
+// Prescriptions
+$route['prescriptions/(:any)'] = 'Prescriptions/prescriptions/$1';
+
+// Reports
+$route['salesReport/(:any)'] = 'Reports/getSales/$1';
+$route['latestDrugs/(:any)'] = 'Reports/latestDrugs/$1';
 

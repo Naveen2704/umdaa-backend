@@ -138,4 +138,14 @@ class Orders extends Rest_Controller {
         $this->DefaultModel->updateData('clinic_pharmacy_inventory_inward', $data, array('clinic_pharmacy_inventory_inward_id'=>$clinic_pharmacy_inventory_inward_id));
     }
 
+    public function Invoice_get($billing_id) {
+        $data['billingInfo'] = $this->DefaultModel->getSingleRecord('billing', array('billing_id' => $billing_id));
+        $data['billingInfo']->mobile = DataCrypt($data['billingInfo']->guest_mobile, 'decrypt');
+        $data['pharmacyInfo'] = $this->DefaultModel->getSingleRecord('clinic_pharmacy', array('clinic_id' => $data['billingInfo']->clinic_id));
+        $data['pharmacyInfo']->logo = base_url('uploads/pharmacy_logos/'. $data['pharmacyInfo']->logo);
+        $data['billingLineItems'] = $this->DefaultModel->getAllRecords('billing_line_items', array('billing_id' => $billing_id));
+        $this->response(array('code' => '200', 'message' => 'Success', 'result' => $data));
+    }
+
+
 }

@@ -182,7 +182,7 @@ class Inventory extends Rest_Controller {
                     $data['inventory'][$i]['inventory_id'] = (int) $value->clinic_pharmacy_inventory_inward_id;
                     $data['inventory'][$i]['trade_name'] = $drugInfo->trade_name;
                     $data['inventory'][$i]['batch_no'] = $value->batch_no;
-                    $data['inventory'][$i]['expiry_date'] = $value->expiry_date;
+                    $data['inventory'][$i]['expiry_date'] = date("M' d, Y",strtotime($value->expiry_date));
                     $data['inventory'][$i]['status'] = $value->status;
                     $data['inventory'][$i]['quantity'] = (int) $value->remaining_quantity;
                     $data['inventory'][$i]['vendor_id'] = $value->vendor_id;
@@ -193,6 +193,17 @@ class Inventory extends Rest_Controller {
         }
         else {
             $this->response(array('code' => '201', 'message' => 'No Data Found'));
+        }
+    }
+
+    public function deleteDrug_get($cpii_id) {
+        $check = $this->DefaultModel->getSingleRecord('clinic_pharmacy_inventory_inward', array('clinic_pharmacy_inventory_inward_id' => $cpii_id));
+        if(is_null($check)) {
+            $this->response(array('code' => '201', 'message' => 'No Data Found'));
+        }
+        else {
+            $this->DefaultModel->deleteRecord('clinic_pharmacy_inventory_inward', array('clinic_pharmacy_inventory_inward_id' => $cpii_id));
+            $this->response(array('code' => '200', 'message' => 'Success'));
         }
     }
 
